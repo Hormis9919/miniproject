@@ -1,0 +1,56 @@
+x-x User input to check x-x
+def predict_price():
+    print("\n🔹 Enter car details to predict its selling price 🔹\n")
+
+    # Get user input
+    year = int(input("Enter car year (e.g., 2015): "))
+    km_driven = int(input("Enter kilometers driven: "))
+    mileage = float(input("Enter mileage (kmpl): "))
+    engine = float(input("Enter engine capacity (CC): "))
+    max_power = float(input("Enter max power (bhp): "))
+    torque = float(input("Enter torque (Nm): "))
+    seats = int(input("Enter number of seats: "))
+
+    # One-hot encoded categorical features
+    fuel_type = input("Enter fuel type (Diesel/Petrol/LPG): ").strip().lower()
+    seller_type = input("Enter seller type (Dealer/Individual/Trustmark Dealer): ").strip().lower()
+    transmission = input("Enter transmission type (Manual/Automatic): ").strip().lower()
+    owner_type = input("Enter owner type (First/Second/Third/Fourth & Above): ").strip().lower()
+
+    # Create a dictionary for input features
+    input_data = {
+        'year': year,
+        'km_driven': km_driven,
+        'mileage': mileage,
+        'engine': engine,
+        'max_power': max_power,
+        'torque': torque,
+        'seats': seats,
+        'fuel_Diesel': 1 if fuel_type == 'diesel' else 0,
+        'fuel_LPG': 1 if fuel_type == 'lpg' else 0,
+        'fuel_Petrol': 1 if fuel_type == 'petrol' else 0,
+        'seller_type_Individual': 1 if seller_type == 'individual' else 0,
+        'seller_type_Trustmark Dealer': 1 if seller_type == 'trustmark dealer' else 0,
+        'transmission_Manual': 1 if transmission == 'manual' else 0,
+        'owner_Fourth & Above Owner': 1 if owner_type == 'fourth & above' else 0,
+        'owner_Second Owner': 1 if owner_type == 'second' else 0,
+        'owner_Test Drive Car': 0,  # This may not be needed
+        'owner_Third Owner': 1 if owner_type == 'third' else 0
+    }
+
+    # Convert to DataFrame and align with training data columns
+    input_df = pd.DataFrame([input_data])
+    input_df = input_df.reindex(columns=X.columns, fill_value=0)  # Fill missing columns with 0
+
+    # Make predictions using the best model
+    rf_pred = rf_model.predict(input_df)[0]
+    et_pred = et_model.predict(input_df)[0]
+    avg_pred = (rf_pred + et_pred) / 2  # Averaging both models
+
+    print("\n🔹 Predicted Selling Prices 🔹")
+    print(f"-> Random Forest Prediction: ₹{rf_pred:,.2f}")
+    print(f"-> Extra Trees Prediction: ₹{et_pred:,.2f}")
+    print(f"-> Averaged Model Prediction: ₹{avg_pred:,.2f} (Recommended)")
+
+# Call the function after training
+predict_price()
