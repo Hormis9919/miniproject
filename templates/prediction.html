@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Price Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h2>Enter Car Details</h2>
+    <form id="predictionForm">
+        <label for="year">Year:</label>
+        <input type="number" name="year" required><br>
+
+        <label for="km_driven">Kilometers Driven:</label>
+        <input type="number" name="km_driven" required><br>
+
+        <label for="mileage">Mileage (kmpl):</label>
+        <input type="number" step="0.1" name="mileage" required><br>
+
+        <label for="engine">Engine CC:</label>
+        <input type="number" name="engine" required><br>
+
+        <label for="max_power">Max Power (bhp):</label>
+        <input type="number" step="0.1" name="max_power" required><br>
+
+        <label for="torque">Torque (Nm):</label>
+        <input type="number" name="torque" required><br>
+
+        <label for="seats">Seats:</label>
+        <input type="number" name="seats" required><br>
+
+        <label for="fuel">Fuel Type:</label>
+        <select name="fuel">
+            <option value="Diesel">Diesel</option>
+            <option value="Petrol">Petrol</option>
+            <option value="LPG">LPG</option>
+            <option value="CNG">CNG</option>
+        </select><br>
+
+        <label for="seller_type">Seller Type:</label>
+        <select name="seller_type">
+            <option value="Dealer">Dealer</option>
+            <option value="Individual">Individual</option>
+            <option value="Trustmark Dealer">Trustmark Dealer</option>
+        </select><br>
+
+        <label for="transmission">Transmission Type:</label>
+        <select name="transmission">
+            <option value="Manual">Manual</option>
+            <option value="Automatic">Automatic</option>
+        </select><br>
+
+        <label for="owner">Owner Type:</label>
+        <select name="owner">
+            <option value="First Owner">First Owner</option>
+            <option value="Second Owner">Second Owner</option>
+            <option value="Third Owner">Third Owner</option>
+            <option value="Fourth & Above Owner">Fourth & Above Owner</option>
+            <option value="Test Drive Car">Test Drive Car</option>
+        </select><br>
+
+        <button type="submit">Predict Price</button>
+    </form>
+
+    <h3>Predicted Price: <span id="result"></span></h3>
+
+    <script>
+        document.getElementById("predictionForm").onsubmit = async function(event) {
+            event.preventDefault();
+            let formData = new FormData(this);
+            let response = await fetch("/predict", {
+                method: "POST",
+                body: formData
+            });
+            let result = await response.json();
+            document.getElementById("result").textContent = result.prediction || "Error: " + result.error;
+        };
+    </script>
+    <a href="/">Go Back Home</a>
+</body>
+</html>
