@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Car Price Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="text-white bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-light bg-gradient" style="background: linear-gradient(to right, #6a11cb, #2575fc);">
+        <div class="container">
+            <a class="navbar-brand text-white fw-bold" href="/">Car Price Predictor</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link text-white" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/about">About</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/faq">FAQ</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/prediction">Price Prediction</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <h1 class="text-center fw-bold">Frequently Asked Questions</h1>
+        <div class="mt-4">
+            <h3>How does this car price predictor work?</h3>
+            <p>Our model uses machine learning algorithms, including Random Forest and Extra Trees Regression, to analyze historical car sales data and predict used car prices.</p>
+            
+            <h3>What details do I need to enter for a prediction?</h3>
+            <p>You need to provide details such as make, model, year, mileage, fuel type, transmission, and location to get an accurate price estimate.</p>
+            
+            <h3>Is this prediction 100% accurate?</h3>
+            <p>No prediction model is 100% accurate, but our AI-powered system provides a highly reliable estimate based on past trends and real-world data.</p>
+            
+            <h3>Is the tool free to use?</h3>
+            <p>Yes, this tool is free to use. Simply enter your car details and get a price estimate instantly.</p>
+        </div>
+    </div>
+</body>
+</html>
+S

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Car Price Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="text-white bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-light bg-gradient" style="background: linear-gradient(to right, #6a11cb, #2575fc);">
+        <div class="container">
+            <a class="navbar-brand text-white fw-bold" href="/">Car Price Predictor</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link text-white" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/about">About</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/faq">FAQ</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="/prediction">Price Prediction</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container d-flex flex-column justify-content-center align-items-center vh-100 text-center">
+        <h1 class="fw-bold">About the Car Price Predictor</h1>
+        <p class="lead">An AI-powered web application for predicting used car prices with high accuracy.</p>
+        <p class="text-light">Our model utilizes advanced machine learning techniques such as <strong>Random Forest</strong> and <strong>Extra Trees Regression</strong> to analyze historical sales data and estimate resale values.</p>
+        <p class="text-light">By inputting details like <strong>make, model, year, mileage</strong>, and other features, users can get a precise price prediction for a used car.</p>
+        <p class="text-light">This project is built using <strong>Flask</strong> for the backend and <strong>Bootstrap</strong> for a responsive and user-friendly interface.</p>
+        <a href="/prediction" class="btn btn-lg btn-primary mt-3 px-5 py-3 fw-bold shadow">Try Price Prediction</a>
+    </div>
+</body>
+</html>

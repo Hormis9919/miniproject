@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Price Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script defer src="{{ url_for('static', filename='scripts.js') }}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-dark text-white">
+    <div class="container mt-5">
+        <div class="card shadow-lg p-4 gradient-box">
+            <h2 class="text-center text-primary">Car Price Predictor</h2>
+            <form id="predictionForm" class="row g-3">
+                
+                <div class="col-md-6">
+                    <label for="year" class="form-label">Year:</label>
+                    <input type="number" name="year" class="form-control" required>
+                </div>
+                
+                <div class="col-md-6">
+                    <label for="km_driven" class="form-label">Kilometers Driven:</label>
+                    <input type="number" name="km_driven" class="form-control" required>
+                </div>
+                
+                <div class="col-md-6">
+                    <label for="mileage" class="form-label">Mileage (kmpl):</label>
+                    <input type="number" step="0.1" name="mileage" class="form-control" required>
+                </div>
+                
+                <div class="col-md-6">
+                    <label for="engine" class="form-label">Engine CC:</label>
+                    <input type="number" name="engine" class="form-control" required>
+                </div>
+                
+                <div class="col-md-6">
+                    <label for="max_power" class="form-label">Max Power (bhp):</label>
+                    <input type="number" step="0.1" name="max_power" class="form-control" required>
+                </div>
+                
+                <div class="col-md-6">
+                    <label for="torque" class="form-label">Torque (Nm):</label>
+                    <input type="number" name="torque" class="form-control" required>
+                </div>
+                
+                <div class="col-md-6">
+                    <label for="seats" class="form-label">Seats:</label>
+                    <input type="number" name="seats" class="form-control" required>
+                </div>
+                
+                <div class="col-md-6">
+                    <label for="fuel" class="form-label">Fuel Type:</label>
+                    <select name="fuel" class="form-select">
+                        <option value="Diesel">Diesel</option>
+                        <option value="Petrol">Petrol</option>
+                        <option value="LPG">LPG</option>
+                        <option value="CNG">CNG</option>
+                    </select>
+                </div>
+                
+                <div class="col-md-6">
+                    <label for="seller_type" class="form-label">Seller Type:</label>
+                    <select name="seller_type" class="form-select">
+                        <option value="Dealer">Dealer</option>
+                        <option value="Individual">Individual</option>
+                        <option value="Trustmark Dealer">Trustmark Dealer</option>
+                    </select>
+                </div>
+                
+                <div class="col-md-6">
+                    <label for="transmission" class="form-label">Transmission Type:</label>
+                    <select name="transmission" class="form-select">
+                        <option value="Manual">Manual</option>
+                        <option value="Automatic">Automatic</option>
+                    </select>
+                </div>
+                
+                <div class="col-md-6">
+                    <label for="owner" class="form-label">Owner Type:</label>
+                    <select name="owner" class="form-select">
+                        <option value="First Owner">First Owner</option>
+                        <option value="Second Owner">Second Owner</option>
+                        <option value="Third Owner">Third Owner</option>
+                        <option value="Fourth & Above Owner">Fourth & Above Owner</option>
+                        <option value="Test Drive Car">Test Drive Car</option>
+                    </select>
+                </div>
+                
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-primary w-50">Predict Price</button>
+                </div>
+            </form>
+            
+            <h3 class="text-center mt-3">Predicted Price: <span id="result" class="text-success fw-bold"></span></h3>
+        </div>
+    </div>
+</body>
+</html>
