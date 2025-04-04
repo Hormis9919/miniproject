@@ -1,12 +1,30 @@
 import pandas as pd
 
 # Load the dataset
-df = pd.read_csv("Car details v3.csv")
+df = pd.read_csv("dataset/Car details v3.csv")
 
 # Handle missing values
 df.dropna(inplace=True)
 
+#outlier removal(IQR)
+def remove_outliers_iqr(df,column):
+    Q1 = df[column].quantile(0.25)
+    Q3 = df[column].quantile(0.75)
+    IQR = Q3 - Q1
+    lower_bound = Q1 - 3.0*IQR
+    upper_bound = Q3 + 3.0*IQR
+    return df[(df[column]>=lower_bound) & (df[column]<=upper_bound)]
+    
+#outlier capping
+def cap_outliers(df,column, lower_percentile = 0.01, upper_percentile = 0.99):
+    lower_bound = df[column].quantile(lower_percentile)
+    upper_bound = df[column].quantile(upper_percentile)
+    df[column] = df[column].clip(lower=lower_bound, upper=upper_bound)
+    return df
 
+#applying outlier handling methods to columns
+df = remove_outliers_iqr(df,"km_driven")
+df = cap_outliers(df,"year")
 # Convert categorical variables to numerical using One-Hot Encoding
 categorical_cols = ['fuel', 'seller_type', 'transmission', 'owner']  # Adjust if needed
 df = pd.get_dummies(df, columns=categorical_cols, drop_first=True)
@@ -54,19 +72,16 @@ param_grid = {
 }
 
 # Optimize Random Forest using RandomizedSearchCV
-rf_cv = RandomizedSearchCV(RandomForestRegressor(), param_grid, cv=5, n_jobs=-1, verbose=2)
+rf_cv = RandomizedSearchCV(RandomForestRegressor(),param_distributions=param_grid,n_iter= cv=5, n_jobs=-1, verbose=2)
 rf_cv.fit(X_train, y_train)
 
 print("Best Parameters for Random Forest:", rf_cv.best_params_)
 
-# Train Random Forest with the best parameters
+#Optimize Extra Trees using` RandomizedSearchCV
+
+#Train Random Forest Regressor
 rf_model = RandomForestRegressor(**rf_cv.best_params_, random_state=42)
 rf_model.fit(X_train, y_train)
-
-# Train Random Forest Regressor
-rf_model = RandomForestRegressor(n_estimators=100, random_state=42)
-rf_model.fit(X_train, y_train)
-
 # Train Extra Trees Regressor
 et_model = ExtraTreesRegressor(n_estimators=100, random_state=42)
 et_model.fit(X_train, y_train)
@@ -88,10 +103,10 @@ def evaluate_model(y_true, y_pred, model_name):
 import joblib
 
 # Save trained models
-joblib.dump(rf_model, "random_forest.pkl")
-joblib.dump(et_model, "extra_trees.pkl")
+#joblib.dump(rf_model, "models/random_forest.pkl")
+#joblib.dump(et_model, "models/extra_trees.pkl")
 
-print("Models saved successfully as 'random_forest.pkl' and 'extra_trees.pkl'!")
+#print("Models saved successfully as 'random_forest.pkl' and 'extra_trees.pkl'!")
 
 
 
@@ -121,7 +136,7 @@ initial_weights = [0.5, 0.5]  # Start with equal weights
 optimized_weights = minimize(loss_function, initial_weights, bounds=bounds, constraints=constraints)
 rf_weight, et_weight = optimized_weights.x
 weights = {"rf_weight": rf_weight, "et_weight": et_weight}
-joblib.dump(weights, "models/model_weights.pkl")
+#joblib.dump(weights, "weights/model_weights.pkl")
 
 print(f"\n🔹 Optimized Weights - Random Forest: {rf_weight:.2f}, Extra Trees: {et_weight:.2f}")
 
