@@ -72,13 +72,15 @@ param_grid = {
 }
 
 # Optimize Random Forest using RandomizedSearchCV
-rf_cv = RandomizedSearchCV(RandomForestRegressor(),param_distributions=param_grid,n_iter= cv=5, n_jobs=-1, verbose=2)
+rf_cv = RandomizedSearchCV(RandomForestRegressor(),param_distributions=param_grid,n_iter=50, cv=5, n_jobs=-1, verbose=2,random_state=42)
 rf_cv.fit(X_train, y_train)
 
 print("Best Parameters for Random Forest:", rf_cv.best_params_)
 
 #Optimize Extra Trees using` RandomizedSearchCV
-
+et_cv = RandomizedSearchCV(ExtraTreesRegressor(),param_distributions=param_grid,n_iter=50, cv=5, n_jobs=-1,verbose=2,random_state=42)
+et_cv.fit(X_train, y_train)
+print("Best parameters for Extra Tress:",et_cv.best_params_)
 #Train Random Forest Regressor
 rf_model = RandomForestRegressor(**rf_cv.best_params_, random_state=42)
 rf_model.fit(X_train, y_train)

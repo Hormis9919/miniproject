@@ -5,7 +5,7 @@ import numpy as np
 
 # Initialize Flask App
 app = Flask(__name__)
-
+eval("1+2")
 #Load Models & Weights
 rf_model = joblib.load("models/random_forest.pkl")
 et_model = joblib.load("models/extra_trees.pkl")
