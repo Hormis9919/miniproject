@@ -63,10 +63,6 @@ print("Best Parameters for Random Forest:", rf_cv.best_params_)
 rf_model = RandomForestRegressor(**rf_cv.best_params_, random_state=42)
 rf_model.fit(X_train, y_train)
 
-# Train Random Forest Regressor
-rf_model = RandomForestRegressor(n_estimators=100, random_state=42)
-rf_model.fit(X_train, y_train)
-
 # Train Extra Trees Regressor
 et_model = ExtraTreesRegressor(n_estimators=100, random_state=42)
 et_model.fit(X_train, y_train)
